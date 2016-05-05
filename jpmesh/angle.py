@@ -40,6 +40,27 @@ class Angle(object):
         """
         return self.second * 1000.0
 
+    def __add__(self, that):
+        return Angle.from_degree(self.degree + that.degree)
+
+    def __sub__(self, that):
+        return Angle.from_degree(self.degree - that.degree)
+
+    def __mul__(self, that):
+        return Angle.from_degree(self.degree * that)
+
+    def __div__(self, that):
+        return Angle.from_degree(self.degree / that)
+
+    def __pos__(self):
+        return Angle.from_degree(self.degree)
+
+    def __neg__(self):
+        return Angle.from_degree(-self.degree)
+
+    def __abs__(self):
+        return Angle.from_degree(abs(self.degree))
+
     @staticmethod
     def from_degree(degree):
         """
