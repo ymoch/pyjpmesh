@@ -52,6 +52,12 @@ class Angle(object):
     def __div__(self, that):
         return Angle.from_degree(self.degree / that)
 
+    def __truediv__(self, that):
+        return Angle.from_degree(self.degree / that)
+
+    def __floordiv__(self, that):
+        return Angle.from_degree(self.degree // that)
+
     def __pos__(self):
         return Angle.from_degree(self.degree)
 
