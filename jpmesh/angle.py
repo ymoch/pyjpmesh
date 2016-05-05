@@ -67,6 +67,12 @@ class Angle(object):
     def __abs__(self):
         return Angle.from_degree(abs(self.degree))
 
+    def __eq__(self, that):
+        return self.degree == that.degree
+
+    def __ne__(self, that):
+        return self.degree != that.degree
+
     @staticmethod
     def from_degree(degree):
         """
