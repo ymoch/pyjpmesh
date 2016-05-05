@@ -34,6 +34,7 @@ class TestAngle(unittest.TestCase):
         self.assertEqual(
             (angle1 - angle2).degree, angle1.degree - angle2.degree)
         self.assertEqual((angle1 * 2).degree, angle1.degree * 2)
+        self.assertEqual((angle1 / 2).degree, angle1.degree / 2)
         self.assertEqual((angle1 / 2.0).degree, angle1.degree / 2.0)
         self.assertEqual((angle2 // 2).degree, angle2.degree // 2)
         self.assertEqual((+angle1).degree, +angle1.degree)
