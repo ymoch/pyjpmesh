@@ -1,0 +1,17 @@
+language: python
+python:
+  - 2.7
+  - 3.5
+install:
+  - pip install -r dev-requirements.txt
+  - pip install -e .
+  - pip install coveralls
+script:
+  # Normal unit tests.
+  - coverage run --source=jpmesh setup.py test
+  # Code quality check.
+  - pylint jpmesh jpmesh/test/*.py
+after_success:
+  - coveralls
+notifications:
+  - email: false

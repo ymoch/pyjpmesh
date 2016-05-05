@@ -1,0 +1,69 @@
+"""
+Angle package.
+"""
+
+class Angle(object):
+    """
+    Angles.
+    """
+    def __init__(self, degree):
+        """
+        Initialize with degrees.
+        """
+        self.__degree = float(degree)
+
+    @property
+    def degree(self):
+        """
+        Get the angle in degrees.
+        """
+        return self.__degree
+
+    @property
+    def minute(self):
+        """
+        Get the angle in minutes.
+        """
+        return self.degree * 60.0
+
+    @property
+    def second(self):
+        """
+        Get the angle in seconds.
+        """
+        return self.minute * 60.0
+
+    @property
+    def millisecond(self):
+        """
+        Get the angle in milliseconds.
+        """
+        return self.second * 1000.0
+
+    @staticmethod
+    def from_degree(degree):
+        """
+        Create from an angle in degrees.
+        """
+        return Angle(degree)
+
+    @staticmethod
+    def from_minute(minute):
+        """
+        Create from an angle in minutes.
+        """
+        return Angle.from_degree(float(minute) / 60.0)
+
+    @staticmethod
+    def from_second(second):
+        """
+        Create from an angle in seconds.
+        """
+        return Angle.from_minute(float(second) / 60.0)
+
+    @staticmethod
+    def from_millisecond(millisecond):
+        """
+        Create from an angle in milliseconds.
+        """
+        return Angle.from_second(float(millisecond) / 1000.0)
