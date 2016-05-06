@@ -19,7 +19,7 @@ setuptools.setup(
     test_suite='nose.collector',
     tests_require=['nose', 'mock'],
     classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
+        'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
         'Intended Audience :: Information Technology',
         'Intended Audience :: Science/Research',
