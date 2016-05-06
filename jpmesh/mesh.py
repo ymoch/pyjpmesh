@@ -235,7 +235,7 @@ class IndexDividedMesh(JapanMesh):
         """
         Returns the mesh code pattern for matching.
         """
-        return r'^({0})-?([0-4])$'.format(cls.ParentMesh.code_pattern())
+        return r'^({0})-?([1-4])$'.format(cls.ParentMesh.code_pattern())
 
     def __init__(self, parent_mesh, div_index):
         """
