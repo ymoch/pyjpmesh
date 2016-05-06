@@ -71,10 +71,12 @@ class FirstMesh(JapanMesh):
         """
         if lon_number < 0 or lon_number >= 100:
             raise ValueError(
-                'Invalid longitude number: {0:d}'.format(lon_number))
+                'Invalid longitude number for {0}: {1:d}'
+                .format(self.__class__.__name__, lon_number))
         if lat_number < 0 or lat_number >= 100:
             raise ValueError(
-                'Invalid latitude number: {0:d}'.format(lat_number))
+                'Invalid latitude number for {0}: {1:d}'
+                .format(self.__class__.__name__, lat_number))
 
         code = '{0:2d}{1:2d}'.format(lat_number, lon_number)
         south_west = Coordinate(
@@ -91,7 +93,9 @@ class FirstMesh(JapanMesh):
         """
         matches = cls.code_pattern_re.match(code)
         if not matches:
-            raise ValueError('Invalid 1st mesh code: {0}'.format(code))
+            raise ValueError(
+                'Invalid mesh code for {0}: {1}'
+                .format(cls.__name__, code))
         lat_number = int(matches.group(1))
         lon_number = int(matches.group(2))
         return cls(lon_number, lat_number)
@@ -157,10 +161,12 @@ class NumberDividedMesh(JapanMesh):
         """
         if lon_number < 0 or lon_number >= self.divide_num:
             raise ValueError(
-                'Invalid longitude number: {0:d}'.format(lon_number))
+                'Invalid longitude number for {0}: {1:d}'
+                .format(self.__class__.__name__, lon_number))
         if lat_number < 0 or lat_number >= self.divide_num:
             raise ValueError(
-                'Invalid latitude number: {0:d}'.format(lat_number))
+                'Invalid latitude number for {0}: {1:d}'
+                .format(self.__class__.__name__, lat_number))
 
         size = self.size()
         code = '{0}{1:1d}{2:1d}'.format(
@@ -178,7 +184,9 @@ class NumberDividedMesh(JapanMesh):
         """
         matches = re.match(cls.code_match_pattern(), code)
         if not matches:
-            raise ValueError('Invalid parent mesh code: {0}'.format(code))
+            raise ValueError(
+                'Invalid mesh code for {0}: {1}'
+                .format(cls.__name__, code))
         parent_mesh = cls.ParentMesh.from_code(matches.group(1))
         lat_number = int(matches.group(2))
         lon_number = int(matches.group(3))
@@ -244,7 +252,8 @@ class IndexDividedMesh(JapanMesh):
         """
         if div_index < 1 or div_index > 4:
             raise ValueError(
-                'Invalid divide index: {0:d}'.format(div_index))
+                'Invalid divide index for {0}: {1:d}'
+                .format(self.__class__.__name__, div_index))
 
         code = '{0}{1:1d}'.format(parent_mesh.code, div_index)
         size = self.size()
@@ -263,7 +272,9 @@ class IndexDividedMesh(JapanMesh):
         """
         matches = re.match(cls.code_match_pattern(), code)
         if not matches:
-            raise ValueError('Invalid mesh code: {0}'.format(code))
+            raise ValueError(
+                'Invalid mesh code for {0}: {1}'
+                .format(cls.__name__, code))
         parent_mesh = cls.ParentMesh.from_code(matches.group(1))
         div_index = int(matches.group(2))
         return cls(parent_mesh, div_index)
