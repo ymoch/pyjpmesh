@@ -4,12 +4,12 @@ Tests for jpmesh.angle.
 
 import unittest
 
-from jpmesh.angle import Angle
+from jpmesh import Angle
 
 
 class TestAngle(unittest.TestCase):
     """
-    Tests for jpmesh.angle.Angle.
+    Tests for jpmesh.Angle.
     """
 
     def test_properties(self):

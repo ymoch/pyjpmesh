@@ -4,12 +4,12 @@ Tests for jpmesh.coordinate.
 
 import unittest
 
-from jpmesh.coordinate import Coordinate
+from jpmesh import Coordinate
 
 
 class TestCoordinate(unittest.TestCase):
     """
-    Tests for jpmesh.coordinate.Coordinate.
+    Tests for jpmesh.Coordinate.
     """
 
     def test_operators(self):
