@@ -6,9 +6,10 @@ import unittest
 
 from nose.tools import eq_
 
-from jpmesh.mesh import FirstMesh, SecondMesh, ThirdMesh, HalfMesh, QuarterMesh, OneEighthMesh
-from jpmesh.coordinate import Coordinate
-from jpmesh.angle import Angle
+from jpmesh import FirstMesh, SecondMesh, ThirdMesh
+from jpmesh import HalfMesh, QuarterMesh, OneEighthMesh
+from jpmesh import Coordinate
+from jpmesh import Angle
 
 
 def _test_from_code(test_class, org_code, code, south_west):
