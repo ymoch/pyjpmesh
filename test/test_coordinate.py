@@ -41,8 +41,8 @@ class TestCoordinate(unittest.TestCase):
 
         # Call __div__ and __truediv__ expressly.
         self.assertEqual(
-            coord1._for_test_div(2.0),
+            coord1.for_test_div(2.0),
             Coordinate(lon=coord1.lon / 2.0, lat=coord1.lat / 2.0))
         self.assertEqual(
-            coord1._for_test_truediv(2.0),
+            coord1.for_test_truediv(2.0),
             Coordinate(lon=coord1.lon / 2.0, lat=coord1.lat / 2.0))

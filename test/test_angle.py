@@ -3,7 +3,6 @@ Tests for jpmesh.angle.
 """
 
 import unittest
-import operator
 
 from jpmesh import Angle
 
@@ -48,6 +47,6 @@ class TestAngle(unittest.TestCase):
 
         # Call __div__ and __truediv__ expressly.
         self.assertEqual(
-            angle1._for_test_div(2.0).degree, angle1.degree / 2.0)
+            angle1.for_test_div(2.0).degree, angle1.degree / 2.0)
         self.assertEqual(
-            angle1._for_test_truediv(2.0).degree, angle1.degree / 2.0)
+            angle1.for_test_truediv(2.0).degree, angle1.degree / 2.0)

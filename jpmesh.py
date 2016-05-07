@@ -115,13 +115,13 @@ class Angle(object):
         """
         return Angle(millisecond)
 
-    def _for_test_div(self, that):
+    def for_test_div(self, that):
         """
         Call __div__() expressly.
         """
         return self.__div__(that)
 
-    def _for_test_truediv(self, that):
+    def for_test_truediv(self, that):
         """
         Call __truediv__() expressly.
         """
@@ -186,13 +186,13 @@ class Coordinate(object):
     def __ne__(self, that):
         return not self == that
 
-    def _for_test_div(self, that):
+    def for_test_div(self, that):
         """
         Call __div__() expressly.
         """
         return self.__div__(that)
 
-    def _for_test_truediv(self, that):
+    def for_test_truediv(self, that):
         """
         Call __truediv__() expressly.
         """
