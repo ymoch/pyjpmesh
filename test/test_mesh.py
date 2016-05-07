@@ -5,6 +5,7 @@ Tests for jpmesh.coordinate.
 import unittest
 
 from nose.tools import eq_
+from nose.tools import raises
 
 from jpmesh import FirstMesh, SecondMesh, ThirdMesh
 from jpmesh import HalfMesh, QuarterMesh, OneEighthMesh
@@ -52,6 +53,18 @@ class TestFirstMesh(unittest.TestCase):
         """
         _test_from_coordinate(FirstMesh, self.CODE, self.SOUTH_WEST)
 
+    @raises(ValueError)
+    def test_invalid_lat_number(self):
+        FirstMesh(100, 0)
+
+    @raises(ValueError)
+    def test_invalid_lon_number(self):
+        FirstMesh(0, 100)
+
+    @raises(ValueError)
+    def test_invalid_code_lat(self):
+        FirstMesh.from_code('53393')
+
 
 class TestSecondMesh(unittest.TestCase):
     """
@@ -74,6 +87,18 @@ class TestSecondMesh(unittest.TestCase):
         Test for jpmesh.coordinate.SecondMesh.from_coordinate.
         """
         _test_from_coordinate(SecondMesh, self.CODE, self.SOUTH_WEST)
+
+    @raises(ValueError)
+    def test_invalid_lat_number(self):
+        SecondMesh(self.SOUTH_WEST, 9, 0)
+
+    @raises(ValueError)
+    def test_invalid_lon_number(self):
+        SecondMesh(self.SOUTH_WEST, 0, 9)
+
+    @raises(ValueError)
+    def test_invalid_code(self):
+        SecondMesh.from_code('5339356')
 
 
 class TestThirdMesh(unittest.TestCase):
@@ -98,6 +123,18 @@ class TestThirdMesh(unittest.TestCase):
         """
         _test_from_coordinate(ThirdMesh, self.CODE, self.SOUTH_WEST)
 
+    @raises(ValueError)
+    def test_invalid_lat_number(self):
+        ThirdMesh(self.SOUTH_WEST, 10, 0)
+
+    @raises(ValueError)
+    def test_invalid_lon_number(self):
+        ThirdMesh(self.SOUTH_WEST, 0, 10)
+
+    @raises(ValueError)
+    def test_invalid_code(self):
+        ThirdMesh.from_code('533935379')
+
 
 class TestHalfMesh(unittest.TestCase):
     """
@@ -120,6 +157,14 @@ class TestHalfMesh(unittest.TestCase):
         Test for jpmesh.coordinate.HalfMesh.from_coordinate.
         """
         _test_from_coordinate(HalfMesh, self.CODE, self.SOUTH_WEST)
+
+    @raises(ValueError)
+    def test_invalid_div_index(self):
+        HalfMesh(self.SOUTH_WEST, 5)
+
+    @raises(ValueError)
+    def test_invalid_code(self):
+        HalfMesh.from_code('53393537')
 
 
 class TestQuarterMesh(unittest.TestCase):
