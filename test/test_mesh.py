@@ -71,7 +71,7 @@ class TestFirstMesh(unittest.TestCase):
 
     @staticmethod
     @raises(ValueError)
-    def test_invalid_code_lat():
+    def test_invalid_code():
         """
         Invalid mesh code causes a ValueError.
         """
@@ -116,7 +116,7 @@ class TestSecondMesh(unittest.TestCase):
 
     @staticmethod
     @raises(ValueError)
-    def test_invalid_code_lat():
+    def test_invalid_code():
         """
         Invalid mesh code causes a ValueError.
         """
@@ -161,7 +161,7 @@ class TestThirdMesh(unittest.TestCase):
 
     @staticmethod
     @raises(ValueError)
-    def test_invalid_code_lat():
+    def test_invalid_code():
         """
         Invalid mesh code causes a ValueError.
         """
