@@ -53,16 +53,28 @@ class TestFirstMesh(unittest.TestCase):
         """
         _test_from_coordinate(FirstMesh, self.CODE, self.SOUTH_WEST)
 
+    @staticmethod
     @raises(ValueError)
-    def test_invalid_lat_number(self):
+    def test_invalid_lat_number():
+        """
+        An invalid latitude number causes a ValueError.
+        """
         FirstMesh(100, 0)
 
+    @staticmethod
     @raises(ValueError)
-    def test_invalid_lon_number(self):
+    def test_invalid_lon_number():
+        """
+        An invalid longitude number causes a ValueError.
+        """
         FirstMesh(0, 100)
 
+    @staticmethod
     @raises(ValueError)
-    def test_invalid_code_lat(self):
+    def test_invalid_code_lat():
+        """
+        Invalid mesh code causes a ValueError.
+        """
         FirstMesh.from_code('53393')
 
 
@@ -90,14 +102,24 @@ class TestSecondMesh(unittest.TestCase):
 
     @raises(ValueError)
     def test_invalid_lat_number(self):
+        """
+        An invalid latitude number causes a ValueError.
+        """
         SecondMesh(self.SOUTH_WEST, 9, 0)
 
     @raises(ValueError)
     def test_invalid_lon_number(self):
+        """
+        An invalid longitude number causes a ValueError.
+        """
         SecondMesh(self.SOUTH_WEST, 0, 9)
 
+    @staticmethod
     @raises(ValueError)
-    def test_invalid_code(self):
+    def test_invalid_code_lat():
+        """
+        Invalid mesh code causes a ValueError.
+        """
         SecondMesh.from_code('5339356')
 
 
@@ -125,14 +147,24 @@ class TestThirdMesh(unittest.TestCase):
 
     @raises(ValueError)
     def test_invalid_lat_number(self):
+        """
+        An invalid latitude number causes a ValueError.
+        """
         ThirdMesh(self.SOUTH_WEST, 10, 0)
 
     @raises(ValueError)
     def test_invalid_lon_number(self):
+        """
+        An invalid longitude number causes a ValueError.
+        """
         ThirdMesh(self.SOUTH_WEST, 0, 10)
 
+    @staticmethod
     @raises(ValueError)
-    def test_invalid_code(self):
+    def test_invalid_code_lat():
+        """
+        Invalid mesh code causes a ValueError.
+        """
         ThirdMesh.from_code('533935379')
 
 
@@ -160,6 +192,9 @@ class TestHalfMesh(unittest.TestCase):
 
     @raises(ValueError)
     def test_invalid_div_index(self):
+        """
+        An invalid division index causes a ValueError.
+        """
         HalfMesh(self.SOUTH_WEST, 5)
 
     @raises(ValueError)
@@ -189,6 +224,8 @@ class TestQuarterMesh(unittest.TestCase):
         """
         _test_from_coordinate(QuarterMesh, self.CODE, self.SOUTH_WEST)
 
+    # Skip the error variations because these are common to HalfMesh.
+
 
 class TestOneEighthMesh(unittest.TestCase):
     """
@@ -211,3 +248,5 @@ class TestOneEighthMesh(unittest.TestCase):
         Test for jpmesh.coordinate.OneEighthMesh.from_coordinate.
         """
         _test_from_coordinate(OneEighthMesh, self.CODE, self.SOUTH_WEST)
+
+    # Skip the error variations because these are common to HalfMesh.
