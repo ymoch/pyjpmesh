@@ -38,3 +38,11 @@ class TestCoordinate(unittest.TestCase):
         self.assertEqual(+coord1, Coordinate(lon=+coord1.lon, lat=+coord1.lat))
         self.assertEqual(-coord1, Coordinate(lon=-coord1.lon, lat=-coord1.lat))
         self.assertNotEqual(coord1, coord2)
+
+        # Call __div__ and __truediv__ expressly.
+        self.assertEqual(
+            coord1._for_test_div(2.0),
+            Coordinate(lon=coord1.lon / 2.0, lat=coord1.lat / 2.0))
+        self.assertEqual(
+            coord1._for_test_truediv(2.0),
+            Coordinate(lon=coord1.lon / 2.0, lat=coord1.lat / 2.0))

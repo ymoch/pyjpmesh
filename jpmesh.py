@@ -115,6 +115,18 @@ class Angle(object):
         """
         return Angle(millisecond)
 
+    def _for_test_div(self, that):
+        """
+        Call __div__() expressly.
+        """
+        return self.__div__(that)
+
+    def _for_test_truediv(self, that):
+        """
+        Call __truediv__() expressly.
+        """
+        return self.__truediv__(that)
+
 
 class Coordinate(object):
     """
@@ -173,6 +185,18 @@ class Coordinate(object):
 
     def __ne__(self, that):
         return not self == that
+
+    def _for_test_div(self, that):
+        """
+        Call __div__() expressly.
+        """
+        return self.__div__(that)
+
+    def _for_test_truediv(self, that):
+        """
+        Call __truediv__() expressly.
+        """
+        return self.__truediv__(that)
 
 
 class JapanMesh(object):
