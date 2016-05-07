@@ -44,3 +44,9 @@ class TestAngle(unittest.TestCase):
         self.assertFalse(angle1 == angle3)
         self.assertFalse(angle1 != angle2)
         self.assertTrue(angle1 != angle3)
+
+        # Call __div__ and __truediv__ expressly.
+        self.assertEqual(
+            angle1.for_test_div(2.0).degree, angle1.degree / 2.0)
+        self.assertEqual(
+            angle1.for_test_truediv(2.0).degree, angle1.degree / 2.0)
