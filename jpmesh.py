@@ -426,7 +426,7 @@ class FirstMesh(JapanMesh):
         return FirstMesh(lon_number, lat_number)
 
 
-def create_number_devided_mesh(name, ParentMesh, divide_num):
+def create_number_devided_mesh(name, parent_mesh, divide_num):
     """
     Create a class derived from NumberDividedMesh.
 
@@ -434,14 +434,14 @@ def create_number_devided_mesh(name, ParentMesh, divide_num):
     :param parent_mesh: The parent mesh class.
     :param divide_num: The number of division.
     """
-    size = ParentMesh.size / divide_num
-    code_pattern = ParentMesh.code_pattern + r'-?[0-9]{2}'
+    size = parent_mesh.size / divide_num
+    code_pattern = parent_mesh.code_pattern + r'-?[0-9]{2}'
     code_parse_regex = re.compile(
         r'^({0})-?([0-{1:d}])([0-{1:d}])$'
-        .format(ParentMesh.code_pattern, divide_num - 1))
+        .format(parent_mesh.code_pattern, divide_num - 1))
 
     return type(name, (NumberDividedMesh,), {
-        'ParentMesh': ParentMesh,
+        'ParentMesh': parent_mesh,
         'divide_num': divide_num,
         'size': size,
         'code_pattern': code_pattern,
@@ -449,20 +449,20 @@ def create_number_devided_mesh(name, ParentMesh, divide_num):
     })
 
 
-def create_index_divided_mesh(name, ParentMesh):
+def create_index_divided_mesh(name, parent_mesh):
     """
     Create a class derived from IndexDividedMesh.
 
     :param name: The class name.
-    :param ParentMesh: The parent mesh class.
+    :param parent_mesh: The parent mesh class.
     """
-    size = ParentMesh.size / 2
-    code_pattern = ParentMesh.code_pattern + r'-?[1-4]'
+    size = parent_mesh.size / 2
+    code_pattern = parent_mesh.code_pattern + r'-?[1-4]'
     code_parse_regex = re.compile(
-        r'^({0})-?([1-4])$'.format(ParentMesh.code_pattern))
+        r'^({0})-?([1-4])$'.format(parent_mesh.code_pattern))
 
     return type(name, (IndexDividedMesh,), {
-        'ParentMesh': ParentMesh,
+        'ParentMesh': parent_mesh,
         'size': size,
         'code_pattern': code_pattern,
         'code_parse_regex': code_parse_regex
