@@ -197,8 +197,12 @@ class TestHalfMesh(unittest.TestCase):
         """
         HalfMesh(self.SOUTH_WEST, 5)
 
+    @staticmethod
     @raises(ValueError)
-    def test_invalid_code(self):
+    def test_invalid_code():
+        """
+        Invalid mesh code causes a ValueError.
+        """
         HalfMesh.from_code('53393537')
 
 
