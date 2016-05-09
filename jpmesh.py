@@ -1,12 +1,12 @@
 """
-Japan mesh code (JIS X 0410) utility for Python.
+Japan grid square code (JIS X 0410) utility for Python.
 """
 
 import re
 
 
 # Meta informations.
-__version__ = '0.9.0'
+__version__ = '1.0.0'
 __author__ = 'Yu Mochizuki'
 __author_email__ = 'ymoch.dev@gmail.com'
 
