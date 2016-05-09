@@ -20,7 +20,7 @@ def load_long_description():
 
 setuptools.setup(
     name='pyjpmesh',
-    description='Japan mesh code (JIS X 0410) utility for Python.',
+    description='Japan grid square code (JIS X 0410) utility for Python.',
     long_description=load_long_description(),
     version=jpmesh.__version__,
     author=jpmesh.__author__,
@@ -30,7 +30,7 @@ setuptools.setup(
     test_suite='nose.collector',
     tests_require=['nose', 'mock'],
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'Intended Audience :: Information Technology',
         'Intended Audience :: Science/Research',

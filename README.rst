@@ -1,7 +1,7 @@
 Pyjpmesh
 ========
 
-Japan mesh code (JIS X 0410) utility for Python.
+Japan grid square code (JIS X 0410) utility for Python.
 
 .. image:: https://travis-ci.org/ymoch/pyjpmesh.svg?branch=master
     :target: https://travis-ci.org/ymoch/pyjpmesh
