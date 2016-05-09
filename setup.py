@@ -4,13 +4,23 @@
 Setting up program for pyjpmesh.
 """
 
+import os
 import setuptools
 
 import jpmesh
 
+def load_long_description():
+    """
+    Load the long description.
+    """
+    with open(os.path.join(os.path.dirname(__file__), 'README.rst') as f:
+        return f.read()
+
+
 setuptools.setup(
     name='pyjpmesh',
     description='Japan mesh code (JIS X 0410) utility for Python.',
+    long_description=load_long_description(),
     version=jpmesh.__version__,
     author=jpmesh.__author__,
     author_email=jpmesh.__author_email__,
