@@ -12,7 +12,7 @@ script:
   # Normal unit tests.
   - coverage run --source=jpmesh setup.py test
   # Code quality check.
-  - pylint jpmesh test/*.py
+  - pylint jpmesh setup.py test/*.py
 after_success:
   - coveralls
 notifications:

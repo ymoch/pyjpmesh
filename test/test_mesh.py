@@ -4,11 +4,12 @@ Tests for jpmesh.coordinate.
 
 import unittest
 
-from nose.tools import eq_
+from nose.tools import ok_, eq_
 from nose.tools import raises
 
 from jpmesh import FirstMesh, SecondMesh, ThirdMesh
 from jpmesh import HalfMesh, QuarterMesh, OneEighthMesh
+from jpmesh import parse_mesh_code
 from jpmesh import Coordinate
 from jpmesh import Angle
 
@@ -33,7 +34,7 @@ def _test_from_coordinate(test_class, code, south_west):
 
 class TestFirstMesh(unittest.TestCase):
     """
-    Tests for jpmesh.coordinate.FirstMesh.
+    Tests for jpmesh.FirstMesh.
     """
     ORG_CODE = '5339'
     CODE = ORG_CODE
@@ -80,7 +81,7 @@ class TestFirstMesh(unittest.TestCase):
 
 class TestSecondMesh(unittest.TestCase):
     """
-    Tests for jpmesh.coordinate.SecondMesh.
+    Tests for jpmesh.SecondMesh.
     """
     ORG_CODE = '5339-45'
     CODE = '533945'
@@ -125,7 +126,7 @@ class TestSecondMesh(unittest.TestCase):
 
 class TestThirdMesh(unittest.TestCase):
     """
-    Tests for jpmesh.coordinate.ThirdMesh.
+    Tests for jpmesh.ThirdMesh.
     """
     ORG_CODE = '5339-35-96'
     CODE = '53393596'
@@ -170,7 +171,7 @@ class TestThirdMesh(unittest.TestCase):
 
 class TestHalfMesh(unittest.TestCase):
     """
-    Tests for jpmesh.coordinate.HalfMesh.
+    Tests for jpmesh.HalfMesh.
     """
     ORG_CODE = '5339-35-96-4'
     CODE = '533935964'
@@ -208,7 +209,7 @@ class TestHalfMesh(unittest.TestCase):
 
 class TestQuarterMesh(unittest.TestCase):
     """
-    Tests for jpmesh.coordinate.QuarterMesh.
+    Tests for jpmesh.QuarterMesh.
     """
     ORG_CODE = '5339-35-96-1-4'
     CODE = '5339359614'
@@ -233,7 +234,7 @@ class TestQuarterMesh(unittest.TestCase):
 
 class TestOneEighthMesh(unittest.TestCase):
     """
-    Tests for jpmesh.coordinate.OneEighthMesh.
+    Tests for jpmesh.OneEighthMesh.
     """
     ORG_CODE = '5339-35-96-1-1-4'
     CODE = '53393596114'
@@ -254,3 +255,36 @@ class TestOneEighthMesh(unittest.TestCase):
         _test_from_coordinate(OneEighthMesh, self.CODE, self.SOUTH_WEST)
 
     # Skip the error variations because these are common to HalfMesh.
+
+
+class TestParseMeshCode(unittest.TestCase):
+    """
+    Tests for jpmesh.parse_mesh_code.
+    """
+    @staticmethod
+    def test_validcode():
+        """
+        Returns correct meshes if valid mesh codes are given.
+        """
+        ok_(isinstance(parse_mesh_code('5339'), FirstMesh))
+        ok_(isinstance(parse_mesh_code('533935'), SecondMesh))
+        ok_(isinstance(parse_mesh_code('53393573'), ThirdMesh))
+        ok_(isinstance(parse_mesh_code('533935731'), HalfMesh))
+        ok_(isinstance(parse_mesh_code('5339357312'), QuarterMesh))
+        ok_(isinstance(parse_mesh_code('53393573123'), OneEighthMesh))
+
+    @staticmethod
+    @raises(ValueError)
+    def test_empty_code():
+        """
+        Raises ValueError if empty mesh codes are given.
+        """
+        isinstance(parse_mesh_code(''), FirstMesh)
+
+    @staticmethod
+    @raises(ValueError)
+    def test_invalid_code():
+        """
+        Raises ValueError if invalid mesh codes are given.
+        """
+        isinstance(parse_mesh_code('533935731234'), FirstMesh)
