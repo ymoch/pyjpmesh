@@ -13,8 +13,9 @@ def load_long_description():
     """
     Load the long description.
     """
-    with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as f:
-        return f.read()
+    readme_file_path = os.path.join(os.path.dirname(__file__), 'README.rst')
+    with open(readme_file_path) as readme_file:
+        return readme_file.read()
 
 
 setuptools.setup(
