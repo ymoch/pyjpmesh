@@ -54,10 +54,10 @@ Here is another example to get the center point of the given mesh.
 
 .. code-block:: python
 
-  from jpmesh import Angle, Coordinate, FirstMesh
+  from jpmesh import parse_mesh_code
 
-  mesh = FirstMesh.from_code('5339')
-  mesh_center = mesh.south_west + (FirstMesh.size / 2.0)
+  mesh = parse_mesh_code('5339')
+  mesh_center = mesh.south_west + (mesh.size / 2.0)
   print mesh_center.lon.degree, mesh_center.lat.degree # 139.5 35.667
 
 To use other mesh classes (SecondMesh, ThirdMesh, etc.),
