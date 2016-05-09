@@ -11,6 +11,15 @@ __author__ = 'Yu Mochizuki'
 __author_email__ = 'ymoch.dev@gmail.com'
 
 
+def _code_pattern_regex(pattern):
+    """
+    Create the mesh pattern regular expression.
+
+    :param pattern: A mesh code.
+    """
+    return re.compile(r'^{0}$'.format(pattern))
+
+
 class Angle(object):
     """
     Angles.
@@ -239,6 +248,7 @@ class NumberDividedMesh(JapanMesh):
         - divide_num: The number of division for the parent mesh.
         - size: The mesh size.
         - code_pattern: The code pattern.
+        - code_regex: The code regular expression
         - code_parse_regex: The regular expression for parsing mesh code.
             - The first match is the parent mesh code.
             - The second match is the latitude number.
@@ -250,6 +260,7 @@ class NumberDividedMesh(JapanMesh):
     divide_num = None
     size = None
     code_pattern = None
+    code_regex = None
     code_parse_regex = None
 
     def __init__(self, parent_mesh, lon_number, lat_number):
@@ -322,6 +333,7 @@ class IndexDividedMesh(JapanMesh):
         - ParentMesh: The parent mesh.
         - size: The mesh size.
         - code_pattern: The code pattern.
+        - code_regex: The code regular expression
         - code_parse_regex: The regular expression for parsing mesh code.
             - The first match is the parent mesh code.
             - The second match is the divide index.
@@ -329,6 +341,7 @@ class IndexDividedMesh(JapanMesh):
     ParentMesh = None
     size = None
     code_pattern = None
+    code_regex = None
     code_parse_regex = None
 
     def __init__(self, parent_mesh, div_index):
@@ -392,6 +405,7 @@ class FirstMesh(JapanMesh):
     """
     size = Coordinate(lon=Angle.from_minute(60), lat=Angle.from_minute(40))
     code_pattern = r'[0-9]{4}'
+    code_regex = _code_pattern_regex(code_pattern)
     code_parse_regex = re.compile(r'^([0-9]{2})([0-9]{2})$')
 
     def __init__(self, lon_number, lat_number):
@@ -460,6 +474,7 @@ def create_number_devided_mesh(name, parent_mesh, divide_num):
     """
     size = parent_mesh.size / divide_num
     code_pattern = parent_mesh.code_pattern + r'-?[0-9]{2}'
+    code_regex = _code_pattern_regex(code_pattern)
     code_parse_regex = re.compile(
         r'^({0})-?([0-{1:d}])([0-{1:d}])$'
         .format(parent_mesh.code_pattern, divide_num - 1))
@@ -469,6 +484,7 @@ def create_number_devided_mesh(name, parent_mesh, divide_num):
         'divide_num': divide_num,
         'size': size,
         'code_pattern': code_pattern,
+        'code_regex': code_regex,
         'code_parse_regex': code_parse_regex
     })
 
@@ -482,6 +498,7 @@ def create_index_divided_mesh(name, parent_mesh):
     """
     size = parent_mesh.size / 2
     code_pattern = parent_mesh.code_pattern + r'-?[1-4]'
+    code_regex = _code_pattern_regex(code_pattern)
     code_parse_regex = re.compile(
         r'^({0})-?([1-4])$'.format(parent_mesh.code_pattern))
 
@@ -489,6 +506,7 @@ def create_index_divided_mesh(name, parent_mesh):
         'ParentMesh': parent_mesh,
         'size': size,
         'code_pattern': code_pattern,
+        'code_regex': code_regex,
         'code_parse_regex': code_parse_regex
     })
 
@@ -499,3 +517,20 @@ ThirdMesh = create_number_devided_mesh('ThirdMesh', SecondMesh, 10) # pylint: di
 HalfMesh = create_index_divided_mesh('HalfMesh', ThirdMesh) # pylint: disable=C0103
 QuarterMesh = create_index_divided_mesh('QuarterMesh', HalfMesh) # pylint: disable=C0103
 OneEighthMesh = create_index_divided_mesh('OneEighthMesh', QuarterMesh) # pylint: disable=C0103
+
+MESH_CLASSES = [
+    FirstMesh, SecondMesh, ThirdMesh,
+    HalfMesh, QuarterMesh, OneEighthMesh
+]
+
+
+def parse_mesh_code(code):
+    """
+    Returns the mesh instance for the given mesh code.
+
+    :param code: A mesh code.
+    """
+    for mesh_class in MESH_CLASSES:
+        if mesh_class.code_regex.match(code):
+            return mesh_class.from_code(code)
+    raise ValueError('Invalid mesh code: {0}'.format(code))
