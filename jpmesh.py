@@ -286,7 +286,7 @@ class NumberDividedMesh(JapanMesh):
                 'Invalid latitude number for {0}: {1:d}'
                 .format(self.__class__.__name__, lat_number))
 
-        code = '{0}{1:1d}{2:1d}'.format(
+        code = '{0}{1:01d}{2:01d}'.format(
             parent_mesh.code, lat_number, lon_number)
         south_west = parent_mesh.south_west + Coordinate(
             lon=self.size.lon * lon_number, lat=self.size.lat * lat_number)
@@ -362,7 +362,7 @@ class IndexDividedMesh(JapanMesh):
                 'Invalid divide index for {0}: {1:d}'
                 .format(self.__class__.__name__, div_index))
 
-        code = '{0}{1:1d}'.format(parent_mesh.code, div_index)
+        code = '{0}{1:01d}'.format(parent_mesh.code, div_index)
         south_west = parent_mesh.south_west + Coordinate(
             lon=self.size.lon * ((div_index - 1) % 2),
             lat=self.size.lat * ((div_index - 1) // 2))
@@ -430,7 +430,7 @@ class FirstMesh(JapanMesh):
                 'Invalid latitude number for {0}: {1:d}'
                 .format(self.__class__.__name__, lat_number))
 
-        code = '{0:2d}{1:2d}'.format(lat_number, lon_number)
+        code = '{0:02d}{1:02d}'.format(lat_number, lon_number)
         south_west = Coordinate(
             lon=Angle.from_degree(lon_number + 100),
             lat=Angle.from_minute(lat_number * 40))
