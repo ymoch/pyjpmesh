@@ -12,8 +12,7 @@ __author_email__ = 'ymoch.dev@gmail.com'
 
 
 def _code_pattern_regex(pattern):
-    """
-    Create the mesh pattern regular expression.
+    """Create the mesh pattern regular expression.
 
     :param pattern: A mesh code.
     """
@@ -21,40 +20,34 @@ def _code_pattern_regex(pattern):
 
 
 class Angle(object):
-    """
-    Angles.
+    """Angles.
     """
     def __init__(self, millisecond):
-        """
-        Initialize with degrees.
+        """Initialize with degrees.
         """
         self.__millisecond = float(millisecond)
 
     @property
     def degree(self):
-        """
-        Get the angle in degrees.
+        """Returns the angle in degrees.
         """
         return self.minute / 60.0
 
     @property
     def minute(self):
-        """
-        Get the angle in minutes.
+        """Returns the angle in minutes.
         """
         return self.second / 60.0
 
     @property
     def second(self):
-        """
-        Get the angle in seconds.
+        """Returns the angle in seconds.
         """
         return self.__millisecond / 1000.0
 
     @property
     def millisecond(self):
-        """
-        Get the angle in milliseconds.
+        """Returns the angle in milliseconds.
         """
         return self.__millisecond
 
@@ -88,9 +81,20 @@ class Angle(object):
     def __ne__(self, that):
         return self.millisecond != that.millisecond
 
+    def __lt__(self, that):
+        return self.millisecond < that.millisecond
+
+    def __le__(self, that):
+        return self.millisecond <= that.millisecond
+
+    def __gt__(self, that):
+        return self.millisecond > that.millisecond
+
+    def __ge__(self, that):
+        return self.millisecond >= that.millisecond
+
     def ratio_in(self, base):
-        """
-        Returns the ratio of this angle in the 'base' angle.
+        """Returns the ratio of this angle in the 'base' angle.
 
         :param base: The 'base' angle.
         """
@@ -98,53 +102,44 @@ class Angle(object):
 
     @staticmethod
     def from_degree(degree):
-        """
-        Create from an angle in degrees.
+        """Create from an angle in degrees.
         """
         return Angle.from_minute(float(degree) * 60.0)
 
     @staticmethod
     def from_minute(minute):
-        """
-        Create from an angle in minutes.
+        """Create from an angle in minutes.
         """
         return Angle.from_second(float(minute) * 60.0)
 
     @staticmethod
     def from_second(second):
-        """
-        Create from an angle in seconds.
+        """Create from an angle in seconds.
         """
         return Angle.from_millisecond(float(second) * 1000.0)
 
     @staticmethod
     def from_millisecond(millisecond):
-        """
-        Create from an angle in milliseconds.
+        """Create from an angle in milliseconds.
         """
         return Angle(millisecond)
 
     def for_test_div(self, that):
-        """
-        Call __div__() expressly.
+        """Call __div__() expressly.
         """
         return self.__div__(that)
 
     def for_test_truediv(self, that):
-        """
-        Call __truediv__() expressly.
+        """Call __truediv__() expressly.
         """
         return self.__truediv__(that)
 
 
 class Coordinate(object):
-    """
-    Coordinates with longitude and latitude.
+    """Coordinates with longitude and latitude.
     """
     def __init__(self, lon, lat):
-        """
-        Initialize.
-
+        """Initialize.
         :param lon: A longitude angle.
         :param lat: A latitude angle.
         """
@@ -153,15 +148,13 @@ class Coordinate(object):
 
     @property
     def lon(self):
-        """
-        Get the longitude.
+        """Get the longitude.
         """
         return self.__lon
 
     @property
     def lat(self):
-        """
-        Get the latitude.
+        """Get the latitude.
         """
         return self.__lat
 
@@ -196,26 +189,21 @@ class Coordinate(object):
         return not self == that
 
     def for_test_div(self, that):
-        """
-        Call __div__() expressly.
+        """Call __div__() expressly.
         """
         return self.__div__(that)
 
     def for_test_truediv(self, that):
-        """
-        Call __truediv__() expressly.
+        """Call __truediv__() expressly.
         """
         return self.__truediv__(that)
 
 
 class JapanMesh(object):
-    """
-    Japan mesh base class.
+    """Japan mesh base class.
     """
     def __init__(self, code, south_west):
-        """
-        Initialize
-
+        """Initialize
         :param code: The mesh code.
         :param south_west: The coordinate at the south-west border.
         """
@@ -224,22 +212,19 @@ class JapanMesh(object):
 
     @property
     def code(self):
-        """
-        Returns the mesh code.
+        """Returns the mesh code.
         """
         return self.__code
 
     @property
     def south_west(self):
-        """
-        Returns the coordinate at the south-west border.
+        """Returns the coordinate at the south-west border.
         """
         return self.__south_west
 
 
 class NumberDividedMesh(JapanMesh):
-    """
-    Mesh class divided with number (which are 0-9).
+    """Mesh class divided with number (which are 0-9).
 
     Note:
         Class variables below must be defined for each subclass.
@@ -264,8 +249,7 @@ class NumberDividedMesh(JapanMesh):
     code_parse_regex = None
 
     def __init__(self, parent_mesh, lon_number, lat_number):
-        """
-        Initialize.
+        """Initialize.
 
         Note: Calling from_code() or from_coordinate() instead of __init__
               is recommended.
@@ -294,8 +278,7 @@ class NumberDividedMesh(JapanMesh):
 
     @classmethod
     def from_code(cls, code):
-        """
-        Create an instance from a mesh code.
+        """Create an instance from a mesh code.
 
         :param code: A mesh code.
         """
@@ -311,8 +294,7 @@ class NumberDividedMesh(JapanMesh):
 
     @classmethod
     def from_coordinate(cls, coord):
-        """
-        Create an instance from a coordinate.
+        """Create an instance from a coordinate.
 
         :param coord: A coordinate.
         """
@@ -324,8 +306,7 @@ class NumberDividedMesh(JapanMesh):
 
 
 class IndexDividedMesh(JapanMesh):
-    """
-    Mesh class divided with indexes (which are 1-4).
+    """Mesh class divided with indexes (which are 1-4).
 
     Note:
         Class variables below must be defined for each subclass.
@@ -345,8 +326,7 @@ class IndexDividedMesh(JapanMesh):
     code_parse_regex = None
 
     def __init__(self, parent_mesh, div_index):
-        """
-        Initialize.
+        """Initialize.
 
         Note: Calling from_code() or from_coordinate() instead of __init__
               is recommended.
@@ -370,9 +350,7 @@ class IndexDividedMesh(JapanMesh):
 
     @classmethod
     def from_code(cls, code):
-        """
-        Create an instance from a mesh code.
-
+        """Create an instance from a mesh code.
         :param code: A mesh code.
         """
         matches = cls.code_parse_regex.match(code)
@@ -386,9 +364,7 @@ class IndexDividedMesh(JapanMesh):
 
     @classmethod
     def from_coordinate(cls, coord):
-        """
-        Create an instance from a coordinate.
-
+        """Create an instance from a coordinate.
         :param coord: A coordinate.
         """
         parent_mesh = cls.ParentMesh.from_coordinate(coord)
@@ -400,8 +376,7 @@ class IndexDividedMesh(JapanMesh):
 
 
 class FirstMesh(JapanMesh):
-    """
-    1st mesh (about 80km square).
+    """1st mesh (about 80km square).
     """
     size = Coordinate(lon=Angle.from_minute(60), lat=Angle.from_minute(40))
     code_pattern = r'[0-9]{4}'
@@ -409,8 +384,7 @@ class FirstMesh(JapanMesh):
     code_parse_regex = re.compile(r'^([0-9]{2})([0-9]{2})$')
 
     def __init__(self, lon_number, lat_number):
-        """
-        Initialize.
+        """Initialize.
 
         Note: Calling from_code() or from_coordinate() instead of __init__
               is recommended.
@@ -438,9 +412,7 @@ class FirstMesh(JapanMesh):
 
     @staticmethod
     def from_code(code):
-        """
-        Create an instance from a mesh code.
-
+        """Create an instance from a mesh code.
         :param code: A mesh code.
         """
         matches = FirstMesh.code_parse_regex.match(code)
@@ -454,9 +426,7 @@ class FirstMesh(JapanMesh):
 
     @staticmethod
     def from_coordinate(coord):
-        """
-        Create an instance from a coordinate.
-
+        """Create an instance from a coordinate.
         :param coord: A coordinate.
         """
         lon_number = int(coord.lon.degree) - 100
@@ -465,9 +435,7 @@ class FirstMesh(JapanMesh):
 
 
 def create_number_devided_mesh(name, parent_mesh, divide_num):
-    """
-    Create a class derived from NumberDividedMesh.
-
+    """Create a class derived from NumberDividedMesh.
     :param name: The class name.
     :param parent_mesh: The parent mesh class.
     :param divide_num: The number of division.
@@ -490,9 +458,7 @@ def create_number_devided_mesh(name, parent_mesh, divide_num):
 
 
 def create_index_divided_mesh(name, parent_mesh):
-    """
-    Create a class derived from IndexDividedMesh.
-
+    """Create a class derived from IndexDividedMesh.
     :param name: The class name.
     :param parent_mesh: The parent mesh class.
     """
@@ -525,9 +491,7 @@ MESH_CLASSES = [
 
 
 def parse_mesh_code(code):
-    """
-    Returns the mesh instance for the given mesh code.
-
+    """Returns the mesh instance for the given mesh code.
     :param code: A mesh code.
     """
     for mesh_class in MESH_CLASSES:

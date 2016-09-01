@@ -8,13 +8,11 @@ from jpmesh import Angle
 
 
 class TestAngle(unittest.TestCase):
-    """
-    Tests for jpmesh.Angle.
+    """Tests for jpmesh.Angle.
     """
 
     def test_properties(self):
-        """
-        Test for properties.
+        """Test for properties.
         """
         millisecond = 3600000
         angle = Angle.from_millisecond(millisecond)
@@ -24,8 +22,7 @@ class TestAngle(unittest.TestCase):
         self.assertEqual(angle.millisecond, float(millisecond))
 
     def test_operators(self):
-        """
-        Test for operators.
+        """Test for operators.
         """
         angle1 = Angle.from_millisecond(1.0)
         angle2 = Angle.from_millisecond(1.0)
@@ -44,6 +41,16 @@ class TestAngle(unittest.TestCase):
         self.assertFalse(angle1 == angle3)
         self.assertFalse(angle1 != angle2)
         self.assertTrue(angle1 != angle3)
+        self.assertFalse(angle1 < angle2)
+        self.assertTrue(angle2 < angle3)
+        self.assertTrue(angle1 <= angle2)
+        self.assertTrue(angle2 <= angle3)
+        self.assertFalse(angle3 <= angle2)
+        self.assertFalse(angle2 > angle1)
+        self.assertTrue(angle3 > angle2)
+        self.assertTrue(angle2 >= angle1)
+        self.assertTrue(angle3 >= angle2)
+        self.assertFalse(angle2 >= angle3)
 
         # Call __div__ and __truediv__ expressly.
         self.assertEqual(

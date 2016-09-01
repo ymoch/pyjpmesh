@@ -8,13 +8,11 @@ from jpmesh import Coordinate
 
 
 class TestCoordinate(unittest.TestCase):
-    """
-    Tests for jpmesh.Coordinate.
+    """Tests for jpmesh.Coordinate.
     """
 
     def test_operators(self):
-        """
-        Test for operators.
+        """Test for operators.
         """
         coord1 = Coordinate(lon=1.0, lat=2.0)
         coord2 = Coordinate(lon=5.0, lat=6.0)
