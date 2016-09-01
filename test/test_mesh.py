@@ -15,8 +15,7 @@ from jpmesh import Angle
 
 
 def _test_from_code(test_class, org_code, code, south_west):
-    """
-    Tests for SomeMesh.from_code.
+    """Tests for SomeMesh.from_code.
     """
     mesh = test_class.from_code(org_code)
     eq_(mesh.code, code)
@@ -24,8 +23,7 @@ def _test_from_code(test_class, org_code, code, south_west):
 
 
 def _test_from_coordinate(test_class, code, south_west):
-    """
-    Tests for SomeMesh.from_coordinate.
+    """Tests for SomeMesh.from_coordinate.
     """
     mesh = test_class.from_coordinate(south_west)
     eq_(mesh.code, code)
@@ -33,8 +31,7 @@ def _test_from_coordinate(test_class, code, south_west):
 
 
 class TestFirstMesh(unittest.TestCase):
-    """
-    Tests for jpmesh.FirstMesh.
+    """Tests for jpmesh.FirstMesh.
     """
     ORG_CODE = '5339'
     CODE = ORG_CODE
@@ -43,38 +40,33 @@ class TestFirstMesh(unittest.TestCase):
         lat=Angle.from_millisecond(127200000.0))
 
     def test_from_code(self):
-        """
-        Test for jpmesh.coordinate.FirstMesh.from_code.
+        """Test for jpmesh.coordinate.FirstMesh.from_code.
         """
         _test_from_code(FirstMesh, self.ORG_CODE, self.CODE, self.SOUTH_WEST)
 
     def test_from_coordinate(self):
-        """
-        Test for jpmesh.coordinate.FirstMesh.from_coordinate.
+        """Test for jpmesh.coordinate.FirstMesh.from_coordinate.
         """
         _test_from_coordinate(FirstMesh, self.CODE, self.SOUTH_WEST)
 
     @staticmethod
     @raises(ValueError)
     def test_invalid_lat_number():
-        """
-        An invalid latitude number causes a ValueError.
+        """An invalid latitude number causes a ValueError.
         """
         FirstMesh(100, 0)
 
     @staticmethod
     @raises(ValueError)
     def test_invalid_lon_number():
-        """
-        An invalid longitude number causes a ValueError.
+        """An invalid longitude number causes a ValueError.
         """
         FirstMesh(0, 100)
 
     @staticmethod
     @raises(ValueError)
     def test_invalid_code():
-        """
-        Invalid mesh code causes a ValueError.
+        """Invalid mesh code causes a ValueError.
         """
         FirstMesh.from_code('53393')
 
@@ -90,43 +82,37 @@ class TestSecondMesh(unittest.TestCase):
         lat=Angle.from_millisecond(128400000.0))
 
     def test_from_code(self):
-        """
-        Test for jpmesh.coordinate.SecondMesh.from_code.
+        """Test for jpmesh.coordinate.SecondMesh.from_code.
         """
         _test_from_code(SecondMesh, self.ORG_CODE, self.CODE, self.SOUTH_WEST)
 
     def test_from_coordinate(self):
-        """
-        Test for jpmesh.coordinate.SecondMesh.from_coordinate.
+        """Test for jpmesh.coordinate.SecondMesh.from_coordinate.
         """
         _test_from_coordinate(SecondMesh, self.CODE, self.SOUTH_WEST)
 
     @raises(ValueError)
     def test_invalid_lat_number(self):
-        """
-        An invalid latitude number causes a ValueError.
+        """An invalid latitude number causes a ValueError.
         """
         SecondMesh(self.SOUTH_WEST, 9, 0)
 
     @raises(ValueError)
     def test_invalid_lon_number(self):
-        """
-        An invalid longitude number causes a ValueError.
+        """An invalid longitude number causes a ValueError.
         """
         SecondMesh(self.SOUTH_WEST, 0, 9)
 
     @staticmethod
     @raises(ValueError)
     def test_invalid_code():
-        """
-        Invalid mesh code causes a ValueError.
+        """Invalid mesh code causes a ValueError.
         """
         SecondMesh.from_code('5339356')
 
 
 class TestThirdMesh(unittest.TestCase):
-    """
-    Tests for jpmesh.ThirdMesh.
+    """Tests for jpmesh.ThirdMesh.
     """
     ORG_CODE = '5339-35-96'
     CODE = '53393596'
